@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TinyCompanion</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <link rel="icon" href="{% static 'img/catpaw.png' %}">
+    <style>
+        body {
+            background-image: url({% static 'img/kittypaws2.jpg' %});
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+        #b1 {
+            border: none;
+            background-color: rgba(255, 255, 255, 0);
+            margin-left: 20px;
+        }
+        #b1 img {
+            width: 60px;
+        }
+        #main {
+            width: 400px;
+            height: 600px;
+            margin: auto;
+            margin-top: 50px;
+            z-index: 1;
+        }
+        #div2 {
+            background-color: rgb(8, 8, 8);
+            height: 100px;
+        }
+        #div2 h1 {
+            color: #ffffff;
+            font-size: 50px;
+        }
+        input {
+            width: 300px;
+            height: 40px;
+            border-radius: 5px;
+            border: 2px solid #ffc107;
+            margin-left: 50px;
+        }
+        input[type="submit"] {
+            width: 300px;
+            height: 50px;
+            background-color: black;
+            color: white;
+            font-weight: bold;
+            margin-left: 50px;
+        }
+        input[type="submit"]:hover {
+            background-color: #ffc107;
+            font-weight: bold;
+            color: black;
+            transition: color 0.5s ease;
+        }
+    </style>
+</head>
+<body>
+    <br>
+    <a href="{% url 'homepgl' %}" title="Back to Home">
+        <button id="b1">
+            <img src="{% static 'img/homesymbol.png' %}" alt="Home">
+        </button>
+    </a>
+    <div id="main" class="bg-white shadow-lg rounded-3">
+        <form method="POST">
+    {% csrf_token %}
+    <div id="div2" class="rounded-top-3 text-center">
+        <br>
+        <h1>Payment</h1>
+        <br><br>
+    </div>
+    <br><br>
+    <input type="text" name="name_on_card" placeholder="Name on Card" required><br><br>
+    <input type="text" name="card_number" placeholder="Card Number" minlength="16" maxlength="16" pattern="\d{16}" required><br><br>
+    <input type="text" name="expiry_date" placeholder="Expiry Date MM/YY" pattern="^\d{2}/\d{2}$" required><br><br>
+    <input type="text" name="cvv" placeholder="CVV" minlength="3" maxlength="3" pattern="\d{3}" required><br><br>
+    <input type="number" name="amount" value="{{total_price}}" readonly required><br><br>
+    <input type="submit" value="Pay"><br><br>
+</form>
+    </div>
+</body>
+</html>

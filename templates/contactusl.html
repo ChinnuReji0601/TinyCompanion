@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TinyCompanion</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <link rel="icon" href="{% static 'img/catpaw.png' %}">
+    <style>
+        body{
+            background-image: url({% static 'img/kittypaws2.jpg' %});
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            /* height: 900px; */
+        }
+        h1{
+            font-size: 90px;
+            color: rgb(0, 0, 0);
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.9);
+            position: fixed;
+            z-index: 2;
+            background-image: url({% static 'img/download.png' %});
+            padding: 10px;
+        }
+
+
+        #div1 #a1{
+            text-decoration: none;
+            font-size: 20px;
+            padding: 30px;
+            color: rgb(255, 255, 255);
+        }
+        #div1{
+            background-color: rgb(0, 0, 0);
+            padding: 10px;
+            position: fixed;
+            z-index: 2;
+        }
+        #div1 #a1:hover{
+            background-color: #ffc107;
+            padding: 13px;
+            color: rgb(0, 0, 0);
+            font-size: 30px;
+            font-weight: 500;
+            transition: font-weight 3s ease;
+            transition: background-color 4s ease;
+            transition: color 3s ease;
+        }
+
+        #maindiv #b1{
+            z-index: 3;
+
+        }
+        #b1{
+            float: inline-end;
+            padding: 10px;
+            border: none;
+            border-radius: 2px;
+        }
+        #b1 a{
+            text-decoration: none;
+            color: white;
+        }
+        #cnt{
+            background-color: white;
+            width: 800px;
+            height: 600px;
+
+        }
+        .dropdown-btn {
+            background-color: #000000;
+            /* color: white; */
+            padding: 10px;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+            margin-left: 400px;
+        }
+
+        /* Dropdown container */
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        /* Dropdown content (hidden by default) */
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+            margin-left: 350px;
+        }
+
+        /* Links inside the dropdown */
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        /* Change color of links on hover */
+        .dropdown-content a:hover {background-color: #f1f1f1}
+
+        /* Show the dropdown content when clicked */
+        .dropdown.show .dropdown-content {
+            display: block;
+        }
+
+</style>
+</head>
+<body>
+    <h1 class="container-fluid text-center " id="h11"><sup class="text-warning">TINY</sup><span class="text-white">COMPANION</span><span class="text-warning"></span></h1>
+    <br><br><br><br><br>
+    <div id="maindiv">
+
+        <div class="container-fluid text-center  pe-2 " id="div1">
+
+                <a id="a1" href="{% url 'homepgl' %}">HOME</a>
+                <a id="a1" href="{% url 'catsl' %}">CATS</a>
+                <a id="a1" href="{% url 'toysl' %}">TOYS</a>
+                <a id="a1" href="{% url 'foodl' %}">FOOD</a>
+                <a id="a1" href="{% url 'doctorl' %}">VET</a>
+                <a id="a1" href="{% url 'aboutusl' %}">ABOUT US</a>
+                <a id="a1" href="{% url 'contactusl' %}">CONTACT US</a>
+                <div class="dropdown">
+                    <button onclick="toggleDropdown()" class="dropdown-btn"><img src="{% static 'img/3lines.png' %}" alt="3lines" style="width: 30px;"></button>
+                    <div class="dropdown-content">
+                        <a href="{% url 'dashboard' %}">Home</a>
+                        <a href="{% url 'tablep' %}">Payment Details</a>
+                        <a href="{% url 'tablea' %}">Appoinment details</a>
+                        <a href="{% url 'cart' %}">Cart</a>
+                        <a href="{% url 'login' %}">Logout</a>
+                    </div>
+                </div>
+
+                <script>
+                    /* Toggle between showing and hiding the dropdown content */
+                    function toggleDropdown() {
+                        document.querySelector(".dropdown").classList.toggle("show");
+                    }
+
+                    // Close the dropdown if the user clicks outside of it
+                    window.onclick = function(event) {
+                        if (!event.target.matches('.dropdown-btn')) {
+                            var dropdowns = document.getElementsByClassName("dropdown-content");
+                            for (var i = 0; i < dropdowns.length; i++) {
+                                var openDropdown = dropdowns[i];
+                                if (openDropdown.style.display === 'block') {
+                                    openDropdown.style.display = 'none';
+                                }
+                            }
+                        }
+                    }
+                </script>
+        </div><br><br><br><br><br>
+        <br><br>  
+        <div id="cnt" class="container shadow-lg">
+            {% for co in contact %}
+            <p class=" pt-5"><img src="{% static 'img/contact.png' %}" alt="" style="width: 40px;"> {{ co.phone }}</p>
+            <p><img src="{% static 'img/email.png' %}" alt="" style="width: 40px;"> <i>{{ co.email }}</i></p>
+            <p><img src="{% static 'img/address.png' %}" alt="" style="width: 40px;">&nbsp; {{ co.address }} </p>
+            {% endfor %}
+            <img src="{% static 'img/instagram.png' %}" alt="" style="width: 40px;"><br><br>
+            <img src="{% static 'img/youtube.png' %}" alt="" style="width: 40px;">
+
+        </div>
+        <div id="co" class="text-center">
+            <p><span class="bg-dark ps-1 pe-1 rounded-5 text-white fw-5">C</span> 2024 tinycompanion.com</p>
+            </div><br> 
+    </div>
+</body>
+</html>
