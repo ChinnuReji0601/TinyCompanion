@@ -355,11 +355,7 @@ def register(request):
                     password=password
                 )
 
-                subject = "Congratulations you are successfully registerd"
-                message = f"{lk.first_name} {lk.last_name} ,thankyou for registering"
-                email_from = settings.EMAIL_HOST_USER
-                recipient_list = [lk.email]
-                send_mail(subject, message, email_from, recipient_list)
+                
 
                 ok = Profile()
                 ok.jk = lk
